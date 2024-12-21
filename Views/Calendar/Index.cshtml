@@ -1,0 +1,154 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>daypilot-project</title>
+
+    <style type="text/css">
+        p, body, td, input, select, button {
+            font-family: -apple-system,system-ui,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
+            font-size: 14px;
+        }
+
+        body {
+            padding: 0px;
+            margin: 0px;
+            background-color: #ffffff;
+        }
+
+        a {
+            color: #1155a3;
+        }
+
+        .space {
+            margin: 10px 0px 10px 0px;
+        }
+
+        .header {
+            background: #003267;
+            background: linear-gradient(to right, #011329 0%,#00639e 44%,#011329 100%);
+            padding: 20px 10px;
+            color: white;
+            box-shadow: 0px 0px 10px 5px rgba(0,0,0,0.75);
+        }
+
+            .header a {
+                color: white;
+            }
+
+            .header h1 a {
+                text-decoration: none;
+            }
+
+            .header h1 {
+                padding: 0px;
+                margin: 0px;
+            }
+
+        .main {
+            padding: 10px;
+            margin-top: 10px;
+        }
+
+        .generated {
+            color: #999;
+        }
+
+            .generated a {
+                color: #999;
+            }
+    </style>
+
+    <!-- DayPilot library -->
+    <script src="~/lib/daypilot/daypilot-all.min.js"></script>
+</head>
+<body>
+
+    <div class="main">
+        <div id="dp"></div>
+    </div>
+
+    <script>
+        const dp = new DayPilot.Scheduler("dp", {
+          crosshairType: "Full",
+          timeHeaders: [{"groupBy":"Day"},{"groupBy":"Hour"}],
+          scale: "Hour",
+          days: 7,
+          startDate: DayPilot.Date.today().firstDayOfWeek(),
+          businessWeekends: true,
+          eventHeight: 40,
+          eventMovingStartEndEnabled: true,
+          eventResizingStartEndEnabled: true,
+          timeRangeSelectingStartEndEnabled: true,
+          allowEventOverlap: false,
+          timeRangeSelectedHandling: "Enabled",
+          onTimeRangeSelected: async (args) => {
+            const scheduler = args.control;
+            const modal = await DayPilot.Modal.prompt("Create a new event:", "Event 1");
+            scheduler.clearSelection();
+            if (modal.canceled) { return; }
+            scheduler.events.add({
+              start: args.start,
+              end: args.end,
+              id: DayPilot.guid(),
+              resource: args.resource,
+              text: modal.result
+            });
+          },
+          eventMoveHandling: "Update",
+          onEventMoved: (args) => {
+            args.control.message("Event moved: " + args.e.text());
+          },
+          eventResizeHandling: "Update",
+          onEventResized: (args) => {
+            args.control.message("Event resized: " + args.e.text());
+          },
+          eventDeleteHandling: "Update",
+          onEventDeleted: (args) => {
+            args.control.message("Event deleted: " + args.e.text());
+          },
+          eventClickHandling: "Edit",
+          eventEditHandling: "Update",
+          onEventEdited: (args) => {
+            args.control.message("Event edited: " + args.e.text());
+          },
+          eventHoverHandling: "Bubble",
+          bubble: new DayPilot.Bubble({
+            onLoad: (args) => {
+              // if the event object doesn't specify "bubbleHtml" property
+              // this onLoad handler will be called to provide the bubble HTML
+              args.html = "Event details";
+            }
+          }),
+          contextMenu: new DayPilot.Menu({
+            items: [
+              { text: "Delete", onClick: (args) => { const dp = args.source.calendar; dp.events.remove(args.source); } }
+            ]
+          }),
+          rowHeaderHideIconEnabled: true,
+        });
+        dp.init();
+
+        const app = {
+          init() {
+            const resources = [
+              {name: "Resource 1", id: "R1"},
+              {name: "Resource 2", id: "R2"},
+              {name: "Resource 3", id: "R3"},
+              {name: "Resource 4", id: "R4"},
+              {name: "Resource 5", id: "R5"},
+              {name: "Resource 6", id: "R6"},
+              {name: "Resource 7", id: "R7"},
+              {name: "Resource 8", id: "R8"},
+              {name: "Resource 9", id: "R9"},
+            ];
+            const events = [];
+            dp.update({resources, events});
+          }
+        };
+        app.init();
+    </script>
+
+</body>
+</html>
