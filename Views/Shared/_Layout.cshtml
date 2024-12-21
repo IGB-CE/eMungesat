@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using eMungesat.Data
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -26,9 +27,12 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Scheduler" asp-action="Index">Scheduler</a>
-                        </li>
+                        @if (User.IsInRole(StaticData.Role_Admin))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Calendar" asp-action="Index">Calendar</a>
+                            </li>
+                        }
                     </ul>
                     <partial name="_LoginPartial.cshtml" />
                 </div>
@@ -49,6 +53,7 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/lib/daypilot/daypilot-all.min.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

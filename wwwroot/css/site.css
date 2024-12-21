@@ -1,31 +1,94 @@
-html {
-  font-size: 14px;
-}
-
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
-
-html {
-  position: relative;
-  min-height: 100%;
+p, body, td, input, select, button {
+    font-family: -apple-system,system-ui,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
+    font-size: 14px;
 }
 
 body {
-  margin-bottom: 60px;
+    padding: 0px;
+    margin: 0px;
+    background-color: #ffffff;
 }
 
-.form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
-  color: var(--bs-secondary-color);
-  text-align: end;
+a {
+    color: #1155a3;
 }
 
-.form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
-  text-align: start;
+.space {
+    margin: 10px 0px 10px 0px;
+}
+
+.header {
+    background: #003267;
+    background: linear-gradient(to right, #011329 0%,#00639e 44%,#011329 100%);
+    padding: 20px 10px;
+    color: white;
+    box-shadow: 0px 0px 10px 5px rgba(0,0,0,0.75);
+}
+
+    .header a {
+        color: white;
+    }
+
+    .header h1 a {
+        text-decoration: none;
+    }
+
+    .header h1 {
+        padding: 0px;
+        margin: 0px;
+    }
+
+.main {
+    padding: 10px
+}
+
+
+/* buttons */
+
+.buttons {
+    margin-bottom: 15px;
+    /*margin-top: 20px;*/
+    display: inline-flex;
+}
+
+.buttons button {
+        background-color: #666666;
+        color: #ffffff;
+        border: none;
+        padding: .5rem 1rem;
+        width: 80px;
+        font-size: 14px;
+        cursor: pointer;
+        margin-right: 1px;
+        transition: all 0.2s;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.08);
+        box-sizing: border-box;
+    }
+buttons button.selected {
+            background-color: #e3e3e3;
+            box-shadow: 0 3px 5px rgba(0,0,0,0.1);
+        }
+.buttons button:first-child {
+            border-top-left-radius: 30px;
+            border-bottom-left-radius: 30px;
+        }
+.buttons button:last-child {
+            border-top-right-radius: 30px;
+            border-bottom-right-radius: 30px;
+        }
+.buttons button:hover {
+            background-color: #ffa216;
+            /*box-shadow: 0 5px 7px rgba(0,0,0,0.1);*/
+        }
+.buttons button:active {
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+.divider-text:before,
+.divider-text:after{
+    color: white;
+    content: "";
+    flex:1;
+    border-bottom: 1px solid #555;
+    margin: auto 0.25rem;
+    box-shadow: 0 -2px;
 }

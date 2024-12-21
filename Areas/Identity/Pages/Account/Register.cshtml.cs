@@ -10,7 +10,8 @@ using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading;
 using System.Threading.Tasks;
-using eMungesat.Models;
+using eMungesat.Data;
+using eMungesat.Data.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -108,6 +109,9 @@ namespace eMungesat.Areas.Identity.Pages.Account
             public string? Role { get; set; }
             [ValidateNever]
             public IEnumerable<SelectListItem> RoleList { get; set; }
+
+            public string FullName { get; set; }
+            public string Address { get; set; }
         }
 
 
@@ -143,6 +147,8 @@ namespace eMungesat.Areas.Identity.Pages.Account
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
+                user.FullName = Input.FullName;
+                user.Address = Input.Address;
                 var result = await _userManager.CreateAsync(user, Input.Password);
 
                 if (result.Succeeded)
