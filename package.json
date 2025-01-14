@@ -1,6 +1,8 @@
 {
   "dependencies": {
-    "daypilot-pro-javascript": "https://npm.daypilot.org/daypilot-pro-javascript/trial/2024.4.6313.tar.gz"
+    "daypilot-pro-javascript": "https://npm.daypilot.org/daypilot-pro-javascript/trial/2025.1.6333.tar.gz",
+    "fullcalendar": "^6.1.15",
+    "fullcalendar-scheduler": "^6.1.15"
   },
   "devDependencies": {
     "eslint": "^9.17.0"

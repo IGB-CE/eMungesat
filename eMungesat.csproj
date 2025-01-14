@@ -20,6 +20,7 @@
 
   <ItemGroup>
     <Folder Include="Views\templates\" />
+    <Folder Include="wwwroot\lib\daypilot\" />
   </ItemGroup>
 
   <ItemGroup>

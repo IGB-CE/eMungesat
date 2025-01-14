@@ -1,14 +1,17 @@
-﻿<script src="~/lib/daypilot/daypilot-all.min.js" asp-append-version="true"></script>
+﻿
+<script src="~/lib/daypilot/daypilot-all.min.js" asp-append-version="true"></script>
 
 <style>
     .main {
-      display: flex;
+        display: flex;
     }
+
     .left {
-      margin-right: 10px;
+        margin-right: 10px;
     }
+
     .right {
-      flex-grow: 1;
+        flex-grow: 1;
     }
 
     /* date picker */
@@ -19,20 +22,22 @@
         border-radius: 50%;
     }
 
-      .navigator_default_select .navigator_default_cell_box {
-          background-color: transparent;
-          opacity: 1;
-      }
-      body .navigator_default_cell.navigator_default_select .navigator_default_cell_text {
-          background-color: #666666;
-          color: #ffffff;
-          border-radius: 50%;
-          opacity: 1;
+    .navigator_default_select .navigator_default_cell_box {
+        background-color: transparent;
+        opacity: 1;
+    }
+
+    body .navigator_default_cell.navigator_default_select .navigator_default_cell_text {
+        background-color: #666666;
+        color: #ffffff;
+        border-radius: 50%;
+        opacity: 1;
     }
 
     .navigator_default_todaybox {
         border: none;
     }
+
     .navigator_default_today .navigator_default_cell_text {
         text-decoration: underline;
     }
@@ -51,16 +56,17 @@
 
     /* calendar header active areas */
     .area_action {
-      background-color: #666666;
-      color: #ffffff;
-      border-radius: 50%;
-      padding: 5px;
-      cursor: pointer;
-      box-sizing: border-box;
+        background-color: #666666;
+        color: #ffffff;
+        border-radius: 50%;
+        padding: 5px;
+        cursor: pointer;
+        box-sizing: border-box;
     }
-    .area_action:hover {
-      background-color: #ffa216;
-    }
+
+        .area_action:hover {
+            background-color: #ffa216;
+        }
 
 </style>
 
@@ -143,14 +149,15 @@
           return;
         }
 
-        const data = {
-          id: args.e.id(),
-          start: args.e.start(),
-          end: args.e.end(),
-          resource: args.e.resource(),
-          text: modal.result.text,
-          color: modal.result.color
-        };
+            const data = {
+        id: args.e.id(),
+        start: new DayPilot.Date(args.e.start()), // Ensure valid format
+        end: new DayPilot.Date(args.e.end()),     // Ensure valid format
+        resource: args.e.resource(),
+        text: modal.result.text,
+        color: modal.result.color
+    };
+
 
       await DayPilot.Http.put(`/api/events/${data.id}`, data);
 
